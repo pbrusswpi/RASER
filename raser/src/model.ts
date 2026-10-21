@@ -29,27 +29,28 @@ export interface Question {
   rubricId: string;
   sectionId: string;
   questionText: string;
-  position: number;
+  displayOrder: number;
   ratingExplanations: RatingExplanation[];
 }
 
 export interface Section {
   sectionId: string;
-  sectionName: SectionType;
-  position: number;
+  name: SectionType;
+  displayOrder: number;
   questions: Question[];
 }
 
 export interface Rubric {
   rubricId: string;
-  rubricName: string;
-  rubricLowQualityThreshold: number;
-  rubricHighQualityThreshold: number;
-  rubricPublicationDate?: string;
-  rubricDeprecationDate?: string;
-  rubricStatus: RubricStatus;
-  rubricUrl: string;
-  rubricDesignerId: string;
+  name: string;
+  lowQualityThreshold: number;
+  highQualityThreshold: number;
+  publicationDate?: string;
+  deprecationDate?: string;
+  replacementRubricId?:string
+  status: RubricStatus;
+  sampleUrl: string;
+  designerId: string;
   sections: Section[];
 }
 
@@ -79,10 +80,10 @@ export type ReviewAssignmentStatus = "ASSIGNED" | "IN_PROGRESS" | "COMPLETED";
 
 export interface Journal {
   journalId: string;
-  journalName: string;
-  journalRegistrationDate: string;
-  journalWithdrawalDate?: string;
-  journalStatus: JournalStatus;
+  name: string;
+  registrationDate: string;
+  withdrawalDate?: string;
+  status: JournalStatus;
   editorId: string;
 }
 
@@ -97,15 +98,15 @@ export interface Issue {
 export interface Paper {
   paperId: string;
   issueId: string;
-  paperTitle: string;
-  paperReference: string;
-  paperStatus: PaperStatus;
-  paperAddedDate: string;
-  paperWithdrawalDate?: string;
-  paperClosedDate?: string;
+  title: string;
+  reference: string;
+  status: PaperStatus;
+  addedDate: string;
+  withdrawalDate?: string;
+  closedDate?: string;
 }
 
-export interface ReviewDesignation {
+export interface ReviewAssignment {
   designationtId: string;
   paperId: string;
   rubricId: string;
@@ -118,7 +119,7 @@ export interface ReviewDesignation {
 }
 
 export type ReviewStatus = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
-export type QualityRating = "HIGH" | "MODERATE" | "LOW";
+export type QualityLevel = "HIGH" | "MODERATE" | "LOW";
 
 export interface Answer {
   answerId: string;
@@ -133,11 +134,11 @@ export interface Review {
   reviewId: string;
   assignmentId: string;
   rubricId: string;
-  reviewStatus: ReviewStatus;
-  reviewStartedDate?: string;
-  reviewCompletedDate?: string;
+  status: ReviewStatus;
+  startedDate?: string;
+  completedDate?: string;
   totalScore?: number;
-  qualityRating?: QualityRating;
+  qualityLevel?: QualityLevel;
   answers: Answer[];
 }
 
