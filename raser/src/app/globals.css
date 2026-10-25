@@ -470,21 +470,17 @@ main {
     flex-direction: column;
     padding: 18px 0;
   }
-
   .mainNav {
     flex-wrap: wrap;
     gap: 12px 18px;
   }
-
   .workflowGrid,
   .rubricGrid {
     grid-template-columns: 1fr;
   }
-
   .summaryGrid {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .rubricSection {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -497,15 +493,12 @@ main {
   .narrowContainer {
     width: min(100% - 28px, 1120px);
   }
-
   .hero {
     padding: 64px 0;
   }
-
   .section {
     padding: 48px 0;
   }
-
   .summaryGrid,
   .rubricMeta {
     grid-template-columns: 1fr;
