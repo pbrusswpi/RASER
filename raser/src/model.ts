@@ -107,7 +107,7 @@ export interface Paper {
 }
 
 export interface ReviewAssignment {
-  designationtId: string;
+  assignmentId: string;
   paperId: string;
   rubricId: string;
   reviewerId: string;
