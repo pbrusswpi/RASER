@@ -1,31 +1,22 @@
 {
-  "name": "raser",
+  "name": "raser-showcase",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "test": "vitest"
+  "scripts": { 
+    "dev": "next dev", 
+    "build": "next build", 
+    "start": "next start" 
   },
-  "dependencies": {
-    "next": "16.4.2",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
+  "dependencies": { 
+    "next": 
+    "^15.0.0", 
+    "react": "^19.0.0", 
+    "react-dom": "^19.0.0" 
   },
-  "devDependencies": {
-    "@testing-library/react": "^16.3.3",
-    "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^6.1.2",
-    "@vitest/coverage-v8": "^5.0.5",
-    "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^9",
-    "eslint-config-next": "16.4.2",
-    "jsdom": "^30.1.3",
-    "typescript": "^5",
-    "vitest": "^5.0.5"
+  "devDependencies": { 
+    "@types/node": "^22.0.0", 
+    "@types/react": "^19.0.0", 
+    "@types/react-dom": "^19.0.0", 
+    "typescript": "^5.6.0" 
   }
 }
