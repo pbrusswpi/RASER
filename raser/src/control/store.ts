@@ -1,5 +1,6 @@
 "use client";
 // Persistence boundary for the demo (localStorage). Replace with API calls for a real backend.
+//localStorage-backed store with the useDB and useReady hooks.
 import { useSyncExternalStore } from "react";
 import type { Rubric } from "@/entities/types";
 import { seedRubric } from "@/entities/seed";
