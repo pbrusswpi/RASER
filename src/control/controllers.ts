@@ -13,7 +13,10 @@ function must<T>(x: T | undefined, msg: string): T {
          
     return x; 
 }
-const need = (v: string, label: string) => { if (!v.trim()) throw new Error(`${label} is required`); return v.trim(); };
+const need = (v: string, label: string) => { 
+  if (!v.trim()) 
+    throw new Error(`${label} is required`); 
+  return v.trim(); };
 
 function patchDraft(db: DB, id: string, fn: (r: Rubric) => Rubric): DB {
   const r = must(db.rubrics.find((x) => x.id === id), "Rubric not found");

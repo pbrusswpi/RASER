@@ -18,7 +18,10 @@ export function QuestionForm({ initial, onSave, onCancel }: { initial?: Question
         </label>
       ))}
       <ErrorBanner error={error} />
-      <div className="row"><button className="primary" type="submit">Save question</button><button type="button" onClick={onCancel}>Cancel</button></div>
+      <div className="row">
+        <button className="primary" type="submit">Save question</button>
+        <button type="button" onClick={onCancel}>Cancel</button>
+      </div>
     </form>
   );
 }

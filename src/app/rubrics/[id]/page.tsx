@@ -73,7 +73,10 @@ export default function RubricPage() {
         );
       })}
       <ErrorBanner error={error} />
-      <div className="row"><button className="primary" onClick={() => run(() => designer.publish(rubric.id))}>Publish rubric</button><span className="muted">Publishing records today as the publication date and locks the rubric.</span></div>
+      <div className="row">
+        <button className="primary" onClick={() => run(() => designer.publish(rubric.id))}>Publish rubric</button>
+        <span className="muted">Publishing records today as the publication date and locks the rubric.</span>
+      </div>
     </div>
   );
 }
