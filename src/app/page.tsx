@@ -21,6 +21,7 @@ export default function RubricList() {
   return (
     <div className="stack">
       <h1>Rubrics</h1>
+      
       <form className="row" onSubmit={(e) => { e.preventDefault(); run(() => { router.push(`/rubrics/${designer.create(name)}`); }); }}>
         <input placeholder="New rubric name" aria-label="New rubric name" value={name} onChange={(e) => setName(e.target.value)} />
         <button className="primary" type="submit">Create rubric</button>
@@ -29,11 +30,28 @@ export default function RubricList() {
       
       {db.rubrics.length === 0 ? <p className="muted">No rubrics yet. Name one above to start.</p> : (
         <table>
-          <thead><tr><th>Name</th><th>Status</th><th>Questions</th><th>Max score</th><th>Published</th><th></th></tr></thead>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Questions</th>
+              <th>Max score</th>
+              <th>Published</th>
+              <th></th>
+            </tr>
+          </thead>
+          
           <tbody>{db.rubrics.map((r) => (
             <tr key={r.id}>
-              <td><Link href={`/rubrics/${r.id}`}>{r.name}</Link></td>
-              <td><StatusBadge status={r.status} /></td><td>{r.questions.length}</td><td>{maxScore(r)}</td><td>{fmtDate(r.publishedAt)}</td>
+              <td>
+                <Link href={`/rubrics/${r.id}`}>{r.name}</Link>
+              </td>
+              <td>
+                <StatusBadge status={r.status} />
+              </td>
+              <td>{r.questions.length}</td>
+              <td>{maxScore(r)}</td>
+              <td>{fmtDate(r.publishedAt)}</td>
               <td>{r.status === "draft" && <button onClick={() => run(() => { if (window.confirm(`Delete "${r.name}"?`)) designer.remove(r.id); })}>Delete</button>}</td>
             </tr>
           ))}</tbody>

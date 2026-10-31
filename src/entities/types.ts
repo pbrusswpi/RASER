@@ -34,9 +34,13 @@ export interface Question {
 export type RubricStatus = "draft" | "published";
 
 export interface Rubric {
-  id: string; name: string; questions: Question[];
-  lowThreshold: number; highThreshold: number;
-  status: RubricStatus; publishedAt?: string;
+  id: string; 
+  name: string; 
+  questions: Question[];
+  lowThreshold: number; 
+  highThreshold: number;
+  status: RubricStatus; 
+  publishedAt?: string;
 }
 
 export const blankExplanations = (): Record<Rating, string> => 
