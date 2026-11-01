@@ -22,9 +22,26 @@ export default function RubricList() {
     <div className="stack">
       <h1>Rubrics</h1>
       
-      <form className="row" onSubmit={(e) => { e.preventDefault(); run(() => { router.push(`/rubrics/${designer.create(name)}`); }); }}>
-        <input placeholder="New rubric name" aria-label="New rubric name" value={name} onChange={(e) => setName(e.target.value)} />
-        <button className="primary" type="submit">Create rubric</button>
+      <form 
+        className="row" 
+        onSubmit={(e) => { 
+          e.preventDefault(); 
+          run(() => { 
+            router.push(`/rubrics/${designer.create(name)}`);
+          });
+        }}>
+        
+        <input 
+          placeholder="New rubric name" 
+          aria-label="New rubric name" 
+          value={name} 
+          onChange={(e) => setName(e.target.value)} 
+        />
+
+        <button className="primary" type="submit">
+          Create rubric
+        </button>
+      
       </form>
       <ErrorBanner error={error} />
       
@@ -41,20 +58,38 @@ export default function RubricList() {
             </tr>
           </thead>
           
-          <tbody>{db.rubrics.map((r) => (
-            <tr key={r.id}>
-              <td>
-                <Link href={`/rubrics/${r.id}`}>{r.name}</Link>
-              </td>
-              <td>
-                <StatusBadge status={r.status} />
-              </td>
-              <td>{r.questions.length}</td>
-              <td>{maxScore(r)}</td>
-              <td>{fmtDate(r.publishedAt)}</td>
-              <td>{r.status === "draft" && <button onClick={() => run(() => { if (window.confirm(`Delete "${r.name}"?`)) designer.remove(r.id); })}>Delete</button>}</td>
-            </tr>
-          ))}</tbody>
+          <tbody>
+            {db.rubrics.map((r) => (
+              <tr key={r.id}>
+                <td>
+                  <Link href={`/rubrics/${r.id}`}>
+                    {r.name}
+                  </Link>
+                </td>
+                <td>
+                  <StatusBadge status={r.status} />
+                </td>
+                <td>{r.questions.length}</td>
+                <td>{maxScore(r)}</td>
+                <td>{fmtDate(r.publishedAt)}</td>
+                <td>
+                  {r.status === "draft" && 
+                    <button 
+                      onClick={() => 
+                        run(() => { 
+                          if (window.confirm(`Delete "${r.name}"?`)) {
+                            designer.remove(r.id);
+                          } 
+                        })
+                      }
+                    >
+                      Delete
+                    </button>
+                  }
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       )}
     </div>
