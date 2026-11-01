@@ -12,8 +12,11 @@ const KEY = "raser-showcase-v1";
 export const EMPTY: DB = { 
     rubrics: [] 
 };
+
 let state: DB = EMPTY;
+
 let loaded = false;
+
 const listeners = new Set<() => void>();
 
 function load() {
@@ -25,7 +28,8 @@ function load() {
     const raw = window.localStorage.getItem(KEY);
     state = raw ? (JSON.parse(raw) as DB) : { rubrics: [seedRubric()] };
   } catch { 
-    state = { rubrics: [seedRubric()] }; }
+    state = { rubrics: [seedRubric()] }; 
+  }
 }
 
 export function getDB(): DB { 
@@ -37,9 +41,20 @@ export function getDB(): DB {
 export function update(fn: (db: DB) => DB) {
   state = fn(getDB());
   try { 
-    window.localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* storage unavailable */ }
+    window.localStorage.setItem(KEY, JSON.stringify(state)); 
+  } catch { 
+    /* storage unavailable */ 
+  }
   listeners.forEach((l) => l());
 }
-function subscribe(l: () => void) { listeners.add(l); return () => { listeners.delete(l); }; }
+
+function subscribe(l: () => void) { 
+  listeners.add(l); 
+  return () => { 
+    listeners.delete(l); 
+  }; 
+}
+
 export const useDB = () => useSyncExternalStore(subscribe, getDB, () => EMPTY);
+
 export const useReady = () => useSyncExternalStore(() => () => {}, () => true, () => false);
