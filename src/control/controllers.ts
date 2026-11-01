@@ -83,7 +83,7 @@ export const designer = {
         throw new Error("Thresholds must be numbers");
       }
         
-      if (p.lowThreshold > p.highThreshold) {
+      if (p.lowThreshold >= p.highThreshold) {
         throw new Error("The low threshold cannot be above the high threshold");
       }
         

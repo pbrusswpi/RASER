@@ -21,8 +21,8 @@ export default function RubricList() {
   return (
     <div className="stack">
       <h1>Rubrics</h1>
-      
-      <form 
+
+      <form
         className="row" 
         onSubmit={(e) => { 
           e.preventDefault(); 
@@ -44,7 +44,12 @@ export default function RubricList() {
       
       </form>
       <ErrorBanner error={error} />
-      
+
+      <p className="notice" role="note">
+        Select a <strong>published</strong> rubric to view it (read-only).
+        Select a <strong>draft</strong> rubric to edit it, add questions, or publish it.
+      </p>
+
       {db.rubrics.length === 0 ? <p className="muted">No rubrics yet. Name one above to start.</p> : (
         <table>
           <thead>
