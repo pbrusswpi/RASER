@@ -1,7 +1,9 @@
 import type { Question, Rubric, Section } from "./types";
 
 const q = (section: Section, text: string, crit: string): Question => ({
-  id: crypto.randomUUID(), section, text,
+  id: crypto.randomUUID(), 
+  section, 
+  text,
   explanations: {
     5: `Fully met: ${crit}`, 
     4: `Mostly met, minor gap: ${crit}`, 

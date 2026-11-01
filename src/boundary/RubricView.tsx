@@ -10,10 +10,22 @@ export function RubricView({ rubric }: { rubric: Rubric }) {
       <header className="stack">
         <h1>{rubric.name} <StatusBadge status={rubric.status} /></h1>
         <dl className="meta">
-          <div><dt>Maximum score</dt><dd>{maxScore(rubric)}</dd></div>
-          <div><dt>Low quality below</dt><dd>{rubric.lowThreshold}</dd></div>
-          <div><dt>High quality from</dt><dd>{rubric.highThreshold}</dd></div>
-          <div><dt>Published</dt><dd>{fmtDate(rubric.publishedAt)}</dd></div>
+          <div>
+            <dt>Maximum score</dt>
+            <dd>{maxScore(rubric)}</dd>
+          </div>
+          <div>
+            <dt>Low quality below</dt>
+            <dd>{rubric.lowThreshold}</dd>
+          </div>
+          <div>
+            <dt>High quality from</dt>
+            <dd>{rubric.highThreshold}</dd>
+          </div>
+          <div>
+            <dt>Published</dt>
+            <dd>{fmtDate(rubric.publishedAt)}</dd>
+          </div>
         </dl>
       </header>
       {SECTIONS.map((s) => {
