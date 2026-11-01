@@ -14,12 +14,16 @@ function must<T>(x: T | undefined, msg: string): T {
     return x; 
 }
 const need = (v: string, label: string) => { 
-  if (!v.trim()) 
+  if (!v.trim()) {
     throw new Error(`${label} is required`); 
-  return v.trim(); };
+  }
+    
+  return v.trim(); 
+};
 
 function patchDraft(db: DB, id: string, fn: (r: Rubric) => Rubric): DB {
   const r = must(db.rubrics.find((x) => x.id === id), "Rubric not found");
+  
   if (r.status !== "draft") {
     throw new Error("Published rubrics can no longer be edited");
   }
@@ -29,23 +33,39 @@ function patchDraft(db: DB, id: string, fn: (r: Rubric) => Rubric): DB {
     };
 }
 
-export interface QuestionInput { text: string; explanations: Record<Rating, string> }
+export interface QuestionInput { 
+  text: string; 
+  explanations: Record<Rating, string> 
+}
 
 export const designer = {
   /** Create Rubric */
   create(name: string): string {
     const id = uid(); 
     const n = need(name, "Rubric name");
-    update((db) => ({ rubrics: [...db.rubrics, { id, name: n, questions: [], lowThreshold: 40, highThreshold: 55, status: "draft" }] }));
+    update((db) => ({ 
+      rubrics: [
+        ...db.rubrics, { 
+          id, 
+          name: n, 
+          questions: [], 
+          lowThreshold: 40, 
+          highThreshold: 55, 
+          status: "draft" 
+        }
+      ] 
+    }));
     return id;
   },
+  
   /** Delete Rubric (drafts only) */
   remove(id: string) {
     update((db) => {
       const r = must(db.rubrics.find(
         (x) => x.id === id), "Rubric not found");
-      if (r.status !== "draft") {
-        throw new Error("Once published, a rubric cannot be deleted");
+      
+        if (r.status !== "draft") {
+          throw new Error("Once published, a rubric cannot be deleted");
       }
       return { 
         rubrics: db.rubrics.filter(
@@ -53,10 +73,12 @@ export const designer = {
         };
     });
   },
+  
   /** Edit Rubric: name and thresholds */
   edit(id: string, p: { name: string; lowThreshold: number; highThreshold: number }) {
     update((db) => patchDraft(db, id, (r) => {
       const name = need(p.name, "Rubric name");
+      
       if (!(p.lowThreshold >= 0) || !(p.highThreshold >= 0)) {
         throw new Error("Thresholds must be numbers");
       }
@@ -72,12 +94,25 @@ export const designer = {
         highThreshold: p.highThreshold };
     }));
   },
+  
   /** Add Question */
   addQuestion(id: string, section: Section, input: QuestionInput) {
     const text = need(input.text, "Question text");
     update(
-        (db) => patchDraft(db, id, (r) => ({ ...r, questions: [...r.questions, { id: uid(), section, text, explanations: input.explanations }] })));
+        (db) => patchDraft(db, id, (r) => ({ 
+          ...r, 
+          questions: [
+            ...r.questions, { 
+              id: uid(), 
+              section, 
+              text, 
+              explanations: input.explanations 
+            }
+          ] 
+        }))
+    );
   },
+  
   /** Edit Question */
   editQuestion(id: string, qid: string, input: QuestionInput) {
     const text = need(input.text, "Question text");
@@ -85,10 +120,18 @@ export const designer = {
       ...r, questions: r.questions.map((q): Question => (q.id === qid ? { ...q, text, explanations: input.explanations } : q)),
     })));
   },
+  
   /** Delete Question */
   deleteQuestion(id: string, qid: string) {
-    update((db) => patchDraft(db, id, (r) => ({ ...r, questions: r.questions.filter((q) => q.id !== qid) })));
+    update((db) => 
+      patchDraft(db, id, (r) => ({ 
+        ...r, 
+        questions: r.questions.filter((q) => 
+          q.id !== qid) 
+      }))
+    );
   },
+  
   /** Publish Rubric: records the publication date and locks the rubric */
   publish(id: string) {
     update((db) => patchDraft(db, id, (r) => {
