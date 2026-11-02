@@ -1,6 +1,6 @@
 import type { Question, Rubric, Section } from "./types";
 
-/* const q = (section: Section, text: string, crit: string): Question => ({
+const q = (section: Section, text: string, crit: string): Question => ({
   id: crypto.randomUUID(), 
   section, 
   text,
@@ -11,9 +11,9 @@ import type { Question, Rubric, Section } from "./types";
     2: `Largely unmet: ${crit}`, 
     1: `Not reported: ${crit}`,
   },
-}); */
+});
 
-const q = (section: Section, text: string): Question => ({
+/* const q = (section: Section, text: string): Question => ({
   id: crypto.randomUUID(), 
   section, 
   text,
@@ -24,28 +24,11 @@ const q = (section: Section, text: string): Question => ({
     2: "Largely unmet", 
     1: "Not reported:",
   },
-});
+}); */
 
 
-/** Small sample so the app is usable on first load. */
-export const seedRubric = (): Rubric => ({
-  id: crypto.randomUUID(),
-  name: "Tropical Plant Research Rubric",
-  status: "published",
-  publishedAt: new Date().toISOString(),
-  lowThreshold: 20,
-  highThreshold: 27,
-  questions: [
-    q("Introduction", "Is the research question and hypothesis clearly stated?"),
-    q("Materials & Sourcing", "Are plant lines, media and reagents identified with sources?"),
-    q("Methodology & Reproducibility", "Are culture conditions described well enough to repeat?"),
-    q("Replication", "Are biological and technical replicates reported?"),
-    q("Risk of Bias & Statistics", "Are statistical tests justified and randomization described?"),
-    q("Reporting & Transparency", "Are raw data and protocols available?"),
-  ],
-});
 
-/* Small sample so the app is usable on first load. 
+/* Small sample so the app is usable on first load. */
 export const seedRubric = (): Rubric => ({
   id: crypto.randomUUID(),
   name: "Tropical Plant Research Rubric",
@@ -61,4 +44,4 @@ export const seedRubric = (): Rubric => ({
     q("Risk of Bias & Statistics", "Are statistical tests justified and randomization described?", "tests, assumptions and randomization stated"),
     q("Reporting & Transparency", "Are raw data and protocols available?", "data and protocols deposited and linked"),
   ],
-}); */
+});

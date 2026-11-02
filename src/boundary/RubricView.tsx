@@ -38,7 +38,7 @@ export function RubricView({ rubric }: { rubric: Rubric }) {
               <div className="panel" key={q.id}>
                 <h3>{number(q.id)}. {q.text}</h3>
                 <dl className="ratings">
-                  {RATINGS.map((r) => (<div key={r}><dt>{r} – {RATING_LABELS[r]}</dt>{/*<dd>{q.explanations[r] || "—"}</dd>*/}</div>))}
+                  {RATINGS.map((r) => (<div key={r}><dt>{r} – {RATING_LABELS[r]}</dt><dd>{q.explanations[r] || "—"}</dd></div>))}
                 </dl>
               </div>
             ))}
