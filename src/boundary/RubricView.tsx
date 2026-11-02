@@ -29,16 +29,36 @@ export function RubricView({ rubric }: { rubric: Rubric }) {
         </dl>
       </header>
       {SECTIONS.map((s) => {
-        const qs = rubric.questions.filter((q) => q.section === s);
+        const qs = rubric.questions.filter(
+          (q) => q.section === s);
+        
         return (
           <section key={s} className="stack">
             <h2>{s}</h2>
-            {qs.length === 0 && <p className="muted">No questions in this section.</p>}
+            
+            {qs.length === 0 && 
+              <p className="muted">
+                No questions in this section.
+              </p>
+            }
+            
             {qs.map((q) => (
               <div className="panel" key={q.id}>
-                <h3>{number(q.id)}. {q.text}</h3>
+                <h3>
+                  {number(q.id)}. {q.text}
+                </h3>
+                
                 <dl className="ratings">
-                  {RATINGS.map((r) => (<div key={r}><dt>{r} – {RATING_LABELS[r]}</dt><dd>{q.explanations[r] || "—"}</dd></div>))}
+                  {RATINGS.map((r) => (
+                    <div key={r}>
+                      <dt>
+                        {r} – {RATING_LABELS[r]}
+                      </dt>
+                      <dd>
+                        {q.explanations[r] || "—"}
+                      </dd>
+                    </div>
+                  ))}
                 </dl>
               </div>
             ))}
