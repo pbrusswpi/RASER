@@ -4,7 +4,6 @@ import { RATINGS, RATING_LABELS, type Question } from "@/entities/types";
 import { designer, type QuestionInput } from "@/control/controllers";
 import { ErrorBanner, useRun } from "./hooks";
 
-//the form for adding or editing a question with its five explanations.
 export function QuestionForm({ 
   initial, 
   onSave, 

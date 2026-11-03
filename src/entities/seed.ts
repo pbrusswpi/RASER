@@ -13,7 +13,6 @@ const q = (section: Section, text: string, crit: string[]): Question => ({
   },
 });
 
-/* Small sample so the app is usable on first load. */
 export const seedRubric = (): Rubric => ({
   id: crypto.randomUUID(),
   name: "Tropical Plant Research Rubric",

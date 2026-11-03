@@ -1,6 +1,5 @@
 "use client";
-// EBC: Control – one function per use case; business rules live here.
-//the nine use cases and their business rules
+
 import { update, type DB } from "./store";
 import { blankExplanations, maxScore, type Question, type Rating, type Rubric, type Section } from "@/entities/types";
 
@@ -39,7 +38,7 @@ export interface QuestionInput {
 }
 
 export const designer = {
-  /** Create Rubric */
+
   create(name: string): string {
     const id = uid(); 
     const n = need(name, "Rubric name");
@@ -58,7 +57,7 @@ export const designer = {
     return id;
   },
   
-  /** Delete Rubric (drafts only) */
+ 
   remove(id: string) {
     update((db) => {
       const r = must(db.rubrics.find(
@@ -74,7 +73,6 @@ export const designer = {
     });
   },
   
-  /** Edit Rubric: name and thresholds */
   edit(id: string, p: { name: string; lowThreshold: number; highThreshold: number }) {
     update((db) => patchDraft(db, id, (r) => {
       const name = need(p.name, "Rubric name");
@@ -95,7 +93,6 @@ export const designer = {
     }));
   },
   
-  /** Add Question */
   addQuestion(id: string, section: Section, input: QuestionInput) {
     const text = need(input.text, "Question text");
     update(
@@ -113,7 +110,7 @@ export const designer = {
     );
   },
   
-  /** Edit Question */
+
   editQuestion(id: string, qid: string, input: QuestionInput) {
     const text = need(input.text, "Question text");
     update((db) => patchDraft(db, id, (r) => ({
@@ -121,7 +118,6 @@ export const designer = {
     })));
   },
   
-  /** Delete Question */
   deleteQuestion(id: string, qid: string) {
     update((db) => 
       patchDraft(db, id, (r) => ({ 
@@ -132,7 +128,7 @@ export const designer = {
     );
   },
   
-  /** Publish Rubric: records the publication date and locks the rubric */
+ 
   publish(id: string) {
     update((db) => patchDraft(db, id, (r) => {
       if (r.questions.length === 0) {

@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 
-/** Runs a controller call and turns thrown business-rule errors into a visible message. */
 export function useRun() {
   const [error, setError] = useState<string | null>(null);
   const run = (fn: () => void) => {

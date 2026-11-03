@@ -1,6 +1,3 @@
-// EBC: Entities – pure domain model and rules.
-// the six fixed sections, ratings, rubric and question types, 
-// and max-score and ordering rules.
 
 export const SECTIONS = [
   "Introduction",

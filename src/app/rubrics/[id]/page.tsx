@@ -1,5 +1,5 @@
 "use client";
-// View Rubric (published, read-only) or Edit Rubric / Add, Edit, Delete Question / Publish (draft)
+
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";

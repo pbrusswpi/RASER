@@ -1,5 +1,5 @@
 "use client";
-// List Rubrics + Create Rubric + Delete Rubric
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

@@ -1,7 +1,6 @@
 import { RATINGS, RATING_LABELS, SECTIONS, fmtDate, maxScore, orderedQuestions, type Rubric } from "@/entities/types";
 import { StatusBadge } from "./hooks";
 
-/** Read-only rubric (View Rubric). */
 export function RubricView({ rubric }: { rubric: Rubric }) {
   const ordered = orderedQuestions(rubric);
   const number = (id: string) => ordered.findIndex((q) => q.id === id) + 1;
