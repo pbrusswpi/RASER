@@ -31,9 +31,9 @@ export class ApplicationStack extends cdk.Stack {
       timeout: Duration.seconds(3),                                         // Example timeout, adjust as needed
     })
 
-    const api_endpoint = new apigw.LambdaRestApi(this, `calculatorapi`, {
+    const api_endpoint = new apigw.LambdaRestApi(this, `raserapi`, {
       handler: default_fn,
-      restApiName: `CalculatorAPI`,
+      restApiName: `RaserAPI`,
       proxy: false,
       defaultCorsPreflightOptions: {                                        // Optional BUT very helpful: Add CORS configuration 
         allowOrigins: apigw.Cors.ALL_ORIGINS,
