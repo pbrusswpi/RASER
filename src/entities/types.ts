@@ -6,8 +6,7 @@ export const SECTIONS = [
   "Introduction",
   "Materials & Sourcing",
   "Methodology & Reproducibility",
-  "Replication",
-  "Risk of Bias & Statistics",
+  "Replication, Risk of Bias & Statistics",
   "Reporting & Transparency",
 ] as const;
 

@@ -1,33 +1,19 @@
 import type { Question, Rubric, Section } from "./types";
 
-/* const q = (section: Section, text: string, crit: string): Question => ({
+const q = (section: Section, text: string, crit: string[]): Question => ({
   id: crypto.randomUUID(), 
   section, 
   text,
   explanations: {
-    5: `Fully met: ${crit}`, 
-    4: `Mostly met, minor gap: ${crit}`, 
-    3: `Partially met: ${crit}`,
-    2: `Largely unmet: ${crit}`, 
-    1: `Not reported: ${crit}`,
-  },
-}); */
-
-const q = (section: Section, text: string): Question => ({
-  id: crypto.randomUUID(), 
-  section, 
-  text,
-  explanations: {
-    5: "Fully met:", 
-    4: "Mostly met, minor gap:", 
-    3: "Partially met:",
-    2: "Largely unmet", 
-    1: "Not reported:",
+    5: `Fully met: ${crit[0]}`, 
+    4: `Mostly met, minor gap: ${crit[1]}`, 
+    3: `Partially met: ${crit[2]}`,
+    2: `Largely unmet: ${crit[3]}`, 
+    1: `Not reported: ${crit[4]}`,
   },
 });
 
-
-/** Small sample so the app is usable on first load. */
+/* Small sample so the app is usable on first load. */
 export const seedRubric = (): Rubric => ({
   id: crypto.randomUUID(),
   name: "Tropical Plant Research Rubric",
@@ -36,29 +22,35 @@ export const seedRubric = (): Rubric => ({
   lowThreshold: 20,
   highThreshold: 27,
   questions: [
-    q("Introduction", "Is the research question and hypothesis clearly stated?"),
-    q("Materials & Sourcing", "Are plant lines, media and reagents identified with sources?"),
-    q("Methodology & Reproducibility", "Are culture conditions described well enough to repeat?"),
-    q("Replication", "Are biological and technical replicates reported?"),
-    q("Risk of Bias & Statistics", "Are statistical tests justified and randomization described?"),
-    q("Reporting & Transparency", "Are raw data and protocols available?"),
+    q("Introduction", "Is the research question and hypothesis clearly stated?", 
+      ["question and hypothesis are explicit",
+        "hypothesis present but not clear",
+        "aims provided but no hypothesis",
+        "poorly worded aims",
+        "no aims"]),
+    q("Materials & Sourcing", "Are all chemical and biological materials correctly identified and sourced from reproducible sources?", 
+      ["all source names fully identified with source location identified",
+        "minor source name or location gap in one reagent",
+        "most source name and location identified",
+        "some source names and locations identified; but others largely missing",
+        "not reported"]),
+    q("Methodology & Reproducibility", "Are experimental protocols clearly explained so as to be reproducible?", 
+      ["fully reproducible as written",
+        "reproducible with minor inference",
+        "broad methods described; key parameters require assumptions",
+        "major steps missing",
+        "insufficient to reproduce"]),
+    q("Replication, Risk of Bias & Statistics", "Were experiments independently replicated?", 
+      [" ≥2 independent biological replicates explicitly stated",
+        "replicates reported; independence not explicit",
+        "technical replicates only",
+        "unclear or single experiment",
+        "no independent replication reported"]),
+    q("Reporting & Transparency", "Are data properly displayed and interpreted?", 
+      ["clear display with appropriate error bars; interpretation supported",
+        "clear display; minor overstatement",
+        "data shown but interpretation partially unsupported",
+        "display unclear or misleading",
+        "data not shown or severely misinterpreted"]),
   ],
 });
-
-/* Small sample so the app is usable on first load. 
-export const seedRubric = (): Rubric => ({
-  id: crypto.randomUUID(),
-  name: "Tropical Plant Research Rubric",
-  status: "published",
-  publishedAt: new Date().toISOString(),
-  lowThreshold: 20,
-  highThreshold: 27,
-  questions: [
-    q("Introduction", "Is the research question and hypothesis clearly stated?", "question and hypothesis are explicit"),
-    q("Materials & Sourcing", "Are plant lines, media and reagents identified with sources?", "accessions, suppliers and catalogue numbers given"),
-    q("Methodology & Reproducibility", "Are culture conditions described well enough to repeat?", "light, temperature, medium and timing specified"),
-    q("Replication", "Are biological and technical replicates reported?", "number and type of replicates stated"),
-    q("Risk of Bias & Statistics", "Are statistical tests justified and randomization described?", "tests, assumptions and randomization stated"),
-    q("Reporting & Transparency", "Are raw data and protocols available?", "data and protocols deposited and linked"),
-  ],
-}); */
