@@ -25,6 +25,9 @@ export default function DesignerHome() {
   return (
     <div className="stack">
       <h1>Your rubrics</h1>
+      <p className="notice" role="note">
+        Select a <strong>draft</strong> rubric to edit it, add questions, or publish it.
+      </p>
       <form 
         className="row" 
         onSubmit={
