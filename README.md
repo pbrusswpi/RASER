@@ -1,17 +1,14 @@
-# Iteration 1 showcase (Next.js + TypeScript)
+# Iteration 2 showcase (Next.js + TypeScript)
 
-    npm install
-    npm run dev
-
-Use cases: 
-list rubric
-view rubric
-create rubric
-delete rubric
-edit rubric 
-publish rubric 
-add question
-edit question
-delete question
+Use cases:
+deprecate rubric
+duplicate rubric
+register journal
+withdraw journal
+show journal dashboard
+create issue
+delete issue
+add paper
+withdraw paper
 
 Data persists in browser localStorage
