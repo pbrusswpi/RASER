@@ -6,8 +6,12 @@ import { StatusBadge } from "@/boundary/hooks";
 
 export default function PublishedRubrics() {
   const db = useDB(); const ready = useReady();
-  if (!ready) return <p>Loading…</p>;
+
+  if (!ready) 
+    return <p>Loading…</p>;
+
   const list = db.rubrics.filter((r) => r.status !== "draft");
+
   return (
     <div className="stack">
       <h1>Published rubrics</h1>
@@ -16,6 +20,7 @@ export default function PublishedRubrics() {
       </p>
       {list.length === 0 ? <p className="muted">No rubrics are published yet. Designers can publish one from the Designer page.</p> : (
         <table>
+
           <thead>
             <tr>
               <th>Name</th>
@@ -24,6 +29,7 @@ export default function PublishedRubrics() {
               <th>Published</th>
             </tr>
           </thead>
+
           <tbody>{list.map((r) => (
             <tr key={r.id}>
               <td>
@@ -42,6 +48,7 @@ export default function PublishedRubrics() {
               </td>
             </tr>
           ))}</tbody>
+          
         </table>
       )}
     </div>
