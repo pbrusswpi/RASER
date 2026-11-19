@@ -16,7 +16,7 @@ Here you have three buttons to Design a rubric, manage a journal, and Browse Pub
 Clicking each button drops the user to its respective page starting with Design a rubric where we see the same page from iteration 1, a new feature is the duplicate rubric use case where selecting the "duplicate" button adds a rubric of duplicated title to the rubrics table and drops the user into the rubric editor page also from iteration 1. 
 
 2. **Deprecate rubric**: 
-Now we can look at our next use case which is deprecate rubric. A rubric cannot be deprecated until an alternative published rubric is available to take its place. The rubric will then say at the top of the page that it has been deprecated and provide a public link to view the replacement. The rubrics table will also show a red "deprecated" status on the row with the deprecated rubric. 
+Now we can look at our next use case which is deprecate rubric. Only a designer can deprecate a rubric on the designer page, the published rubrics page is read-only. A rubric cannot be deprecated until an alternative published rubric is available to take its place. The rubric will then say at the top of the page that it has been deprecated and provide a public link to view the replacement. The rubrics table will also show a red "deprecated" status on the row with the deprecated rubric. 
 
 3. **Register Journal**: 
 
