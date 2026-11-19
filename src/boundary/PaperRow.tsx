@@ -90,6 +90,7 @@ export function PaperRow({ paper, rubric, assignments, journalName, volume, numb
         }}
       >
         <input 
+          hidden
           type="email" 
           placeholder="Reviewer email" 
           aria-label="Reviewer email" 
@@ -98,13 +99,14 @@ export function PaperRow({ paper, rubric, assignments, journalName, volume, numb
             (e) => setEmail(e.target.value)} 
         />
         <input 
+          hidden
           type="date" 
           aria-label="Review deadline" 
           value={deadline} 
           onChange={
             (e) => setDeadline(e.target.value)} 
         />
-        <button type="submit" disabled>
+        <button hidden type="submit">
           Assign reviewer
         </button>
       </form>
