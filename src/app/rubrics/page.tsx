@@ -14,10 +14,14 @@ export default function PublishedRubrics() {
 
   return (
     <div className="stack">
-      <h1>Published rubrics</h1>
+      <h1>
+        Published rubrics
+      </h1>
+      
       <p className="notice" role="note">
         Select a <strong>published</strong> rubric to view it (read-only).
       </p>
+      
       {list.length === 0 ? <p className="muted">No rubrics are published yet. Designers can publish one from the Designer page.</p> : (
         <table>
 
