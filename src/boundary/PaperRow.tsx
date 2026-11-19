@@ -104,7 +104,7 @@ export function PaperRow({ paper, rubric, assignments, journalName, volume, numb
           onChange={
             (e) => setDeadline(e.target.value)} 
         />
-        <button type="submit">
+        <button type="submit" disabled>
           Assign reviewer
         </button>
       </form>
