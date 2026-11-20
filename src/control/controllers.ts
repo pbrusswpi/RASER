@@ -1,6 +1,4 @@
 "use client";
-// EBC: Control – every use case from the case study is one function here.
-// Business rules live here so the UI (boundary) stays thin.
 import { update, type DB } from "./store";
 import { blankExplanations, maxScore, orderedQuestions, type Question, type Rating, type Rubric, type Section } from "@/entities/types";
 
