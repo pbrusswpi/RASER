@@ -18,8 +18,8 @@ export const seedRubric = (): Rubric => ({
   name: "Tropical Plant Research Rubric",
   status: "published",
   publishedAt: new Date().toISOString(),
-  lowThreshold: 20,
-  highThreshold: 27,
+  lowThreshold: 8,
+  highThreshold: 18,
   questions: [
     q("Introduction", "Is the research question and hypothesis clearly stated?", 
       ["question and hypothesis are explicit",

@@ -1,102 +1,16 @@
-"use client";
-
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useDB, useReady } from "@/control/store";
-import { designer } from "@/control/controllers";
-import { fmtDate, maxScore } from "@/entities/types";
-import { ErrorBanner, StatusBadge, useRun } from "@/boundary/hooks";
 
-export default function RubricList() {
-  const db = useDB(); 
-  const ready = useReady(); 
-  const router = useRouter();
-  const { error, run } = useRun();
-  const [name, setName] = useState("");
-  
-  if (!ready) 
-    return <p>Loading…</p>;
-  
+export default function Home() {
   return (
     <div className="stack">
-      <h1>Rubrics</h1>
-
-      <form
-        className="row" 
-        onSubmit={(e) => { 
-          e.preventDefault(); 
-          run(() => { 
-            router.push(`/rubrics/${designer.create(name)}`);
-          });
-        }}>
-        
-        <input 
-          placeholder="New rubric name" 
-          aria-label="New rubric name" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)} 
-        />
-
-        <button className="primary" type="submit">
-          Create rubric
-        </button>
-      
-      </form>
-      <ErrorBanner error={error} />
-
-      <p className="notice" role="note">
-        Select a <strong>published</strong> rubric to view it (read-only).
-        Select a <strong>draft</strong> rubric to edit it, add questions, or publish it.
-      </p>
-
-      {db.rubrics.length === 0 ? <p className="muted">No rubrics yet. Name one above to start.</p> : (
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Status</th>
-              <th>Questions</th>
-              <th>Max score</th>
-              <th>Published</th>
-              <th></th>
-            </tr>
-          </thead>
-          
-          <tbody>
-            {db.rubrics.map((r) => (
-              <tr key={r.id}>
-                <td>
-                  <Link href={`/rubrics/${r.id}`}>
-                    {r.name}
-                  </Link>
-                </td>
-                <td>
-                  <StatusBadge status={r.status} />
-                </td>
-                <td>{r.questions.length}</td>
-                <td>{maxScore(r)}</td>
-                <td>{fmtDate(r.publishedAt)}</td>
-                <td>
-                  {r.status === "draft" && 
-                    <button 
-                      onClick={() => 
-                        run(() => { 
-                          if (window.confirm(`Delete "${r.name}"?`)) {
-                            designer.remove(r.id);
-                          } 
-                        })
-                      }
-                    >
-                      Delete
-                    </button>
-                  }
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      <h1>Rubrics for assessing scientific experimental research</h1>
+      <p className="muted">RASER sits alongside the review systems journals already use. Reviewers paste their finished review into those systems.</p>
+      <div className="cards">
+        <Link href="/designer" className="panel"><h3>Design a rubric</h3><p>Write questions for six fixed sections, set quality thresholds and publish.</p></Link>
+        <Link href="/editor" className="panel"><h3>Manage a journal</h3><p>Adopt rubrics, add papers to issues, assign reviewers and send them access links.</p></Link>
+        <Link href="/rubrics" className="panel"><h3>Browse published rubrics</h3><p>Read any published rubric as a static page you can link to.</p></Link>
+      </div>
+      <p>Reviewer? Open the link from your invitation email and enter your PIN.</p>
     </div>
   );
 }

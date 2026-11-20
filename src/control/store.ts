@@ -1,15 +1,24 @@
 "use client";
-
 import { useSyncExternalStore } from "react";
-import type { Rubric } from "@/entities/types";
+import type { Assignment, Issue, Journal, Paper, Rubric } from "@/entities/types";
 import { seedRubric } from "@/entities/seed";
 
 export interface DB { 
-    rubrics: Rubric[] 
+  rubrics: Rubric[]; 
+  journals: Journal[]; 
+  issues: Issue[]; 
+  papers: Paper[]; 
+  assignments: Assignment[] 
 }
-const KEY = "raser-showcase-v1";
+
+const KEY = "raser-db-v1";
+
 export const EMPTY: DB = { 
-    rubrics: [] 
+  rubrics: [], 
+  journals: [], 
+  issues: [], 
+  papers: [], 
+  assignments: [] 
 };
 
 let state: DB = EMPTY;
@@ -22,35 +31,46 @@ function load() {
   if (loaded || typeof window === "undefined") {
     return;
   }
+    
   loaded = true;
   try {
     const raw = window.localStorage.getItem(KEY);
-    state = raw ? (JSON.parse(raw) as DB) : { rubrics: [seedRubric()] };
-  } catch { 
-    state = { rubrics: [seedRubric()] }; 
+    state = raw ? (JSON.parse(raw) as DB) : { ...EMPTY, rubrics: [seedRubric()] };
+  } catch {
+    state = { ...EMPTY, rubrics: [seedRubric()] };
   }
 }
 
 export function getDB(): DB { 
-    load(); 
-    return state; 
+  load(); 
+  return state; 
 }
 
 export function update(fn: (db: DB) => DB) {
-  state = fn(getDB());
+  const next = fn(getDB());
+  state = next;
   try { 
-    window.localStorage.setItem(KEY, JSON.stringify(state)); 
-  } catch { 
-    
+    window.localStorage.setItem(KEY, JSON.stringify(next)); 
+  } 
+  catch { 
+    /* storage full or blocked */ 
   }
   listeners.forEach((l) => l());
 }
 
-function subscribe(l: () => void) { 
-  listeners.add(l); 
+function subscribe(l: () => void) {
+  listeners.add(l);
+  const onStorage = (e: StorageEvent) => { 
+    if (e.key === KEY && e.newValue) { 
+      state = JSON.parse(e.newValue); 
+      l();
+    } 
+  };
+  window.addEventListener("storage", onStorage);
   return () => { 
     listeners.delete(l); 
-  }; 
+    window.removeEventListener("storage", onStorage); 
+  };
 }
 
 export const useDB = () => useSyncExternalStore(subscribe, getDB, () => EMPTY);

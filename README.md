@@ -1,3 +1,52 @@
+# Iteration 2
+
+**Frontend**:
+Next.js app hosted on AWS Amplify (replaces the S3 bucket; approved by the professor), deployed from the StructureUpdate branch.
+
+**Access Url**: 
+https://iteration2.dt22dakt0bfii.amplifyapp.com 
+
+We can see here the RASER landing page.  
+
+Notice the top right of the window shows the actors access menu (Published Rubrics, Rubric designer, Journal editor). The site as we see it right now is that of an admin that has access to all actor roles.  
+
+Here you have three buttons to Design a rubric, manage a journal, and Browse Published rubrics.  
+
+1. **Duplicate Rubric**: 
+Clicking each button drops the user to its respective page starting with Design a rubric where we see the same page from iteration 1, a new feature is the duplicate rubric use case where selecting the "duplicate" button adds a rubric of duplicated title to the rubrics table and drops the user into the rubric editor page also from iteration 1. 
+
+2. **Deprecate rubric**: 
+Now we can look at our next use case which is deprecate rubric. Only a designer can deprecate a rubric on the designer page, the published rubrics page is read-only. A rubric cannot be deprecated until an alternative published rubric is available to take its place. The rubric will then say at the top of the page that it has been deprecated and provide a public link to view the replacement. The rubrics table will also show a red "deprecated" status on the row with the deprecated rubric. 
+
+3. **Register Journal**: 
+
+This concludes our Rubric editor use cases. The next use cases pertain to the Journal editor. Starting by selecting the editor button on the top right of the page to arrive at the Journals window. To register a journal, input a Journal name into the text field before selecting the blue Journal button.  
+
+4. **Show Journal Dashboard** 
+
+This registers your journal and displays it on the journal dashboard with a green "active" 
+label which is the next applicable use case. 
+
+5. **Withdraw Journal** 
+To withdraw a journal, simply select the white 'Withdraw' button underneath the register journal button. The page will ask for your confirmation, where you can confirm or cancel your journal withdraw. When confirmed, the journal can no longer be edited and is flagged with a red 'withdrawn' label. 
+
+6. **Create Issue** 
+On the journal editor page, you have the option to adopt a published rubric to the journal. Below the rubric adoption, you will find the next use case: Create issue. To create an issue for the journal there is the option to set the volume number and the issue number. Once configured, select the blue "create issue" to the right and then an issue will appear below with the set Volume and Number. 
+
+7. **Delete Issue** 
+The next use case would then be delete issue, which is the white button that appears to the right of the volume and number of the newly created issue. Select the 'Delete issue button to delete the issue. 
+
+8. **Add Paper** 
+When an issue has been created, below the new issue the user sees the next applicable use case: Add Paper. The user can input a paper title and author name in the text fields as well as a rubric to connect to the paper. The paper cannot be created until each field has been completed.  
+
+9. **Withdraw Paper** 
+When a paper is created, to the right of its details that were inputted is a white "withdraw" button as the last use case. Select the "withdraw" button to withdraw the paper. 
+
+**AI Use Acknowledgement**: 
+Claude Code was integrated in the editing and reviewing stages of iteration 2 to ensure code correctness and overall application functionality in areas such as frontend styling as well as the backend setup involving <TO_BE_DO> 
+
+**Back end**:
+
 # Iteration 1
 
 **Frontend**:
