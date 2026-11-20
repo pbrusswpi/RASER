@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useDB, useReady } from "@/control/store";
 import { ReviewWorkspace } from "@/boundary/ReviewWorkspace";
 
-// Access Rubric: unique URL + six-digit PIN. Replace the client-side PIN check with a server check when a backend exists.
 export default function ReviewPage() {
   const { token } = useParams<{ token: string }>();
   const db = useDB(); 
