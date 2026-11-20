@@ -9,7 +9,6 @@ export interface ReviewContext {
   number: number 
 }
 
-/** Formatted ASCII text the reviewer pastes into their existing review system. */
 export function buildReviewText({ rubric, paper, assignment, journalName, volume, number }: ReviewContext): string {
   const qs = orderedQuestions(rubric);
   
