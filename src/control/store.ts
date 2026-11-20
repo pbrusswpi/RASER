@@ -1,6 +1,4 @@
 "use client";
-// Persistence boundary for the demo: localStorage-backed store.
-// Swap getDB/update for API calls when a backend exists; controllers stay the same.
 import { useSyncExternalStore } from "react";
 import type { Assignment, Issue, Journal, Paper, Rubric } from "@/entities/types";
 import { seedRubric } from "@/entities/seed";
@@ -48,7 +46,6 @@ export function getDB(): DB {
   return state; 
 }
 
-/** Apply a pure transformation. If fn throws, nothing is saved. */
 export function update(fn: (db: DB) => DB) {
   const next = fn(getDB());
   state = next;
