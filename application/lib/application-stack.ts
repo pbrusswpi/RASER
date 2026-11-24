@@ -49,11 +49,26 @@ export class ApplicationStack extends cdk.Stack {
     const deleteRubricResource = rubricResource.addResource('delete');
     const editRubricResource = rubricResource.addResource('edit');
     const publishRubricResource = rubricResource.addResource('publish');
+    const duplicateRubricResource = rubricResource.addResource('duplicate');
+    const deprecateRubricResource = rubricResource.addResource('deprecate');
 
     const questionResource = api_endpoint.root.addResource('question')
     const addQuestionResource = questionResource.addResource('add');
     const editQuestionResource = questionResource.addResource('edit');
     const deleteQuestionResource = questionResource.addResource('delete');
+
+    const journalResource = api_endpoint.root.addResource('journal');
+    const registerJournalResource = journalResource.addResource('register');
+    const withdrawJournalResource = journalResource.addResource('withdraw');
+    const viewJournalsResource = journalResource.addResource('view');
+
+    const issueResource = api_endpoint.root.addResource('issue');
+    const createIssueResource = issueResource.addResource('create');
+    const deleteIssueResource = issueResource.addResource('delete');
+
+    const paperResource = api_endpoint.root.addResource('paper');
+    const addPaperResource = paperResource.addResource('add');
+    const withdrawPaperResource = paperResource.addResource('withdraw');
 
     // https://github.com/aws/aws-cdk/blob/main/packages/aws-cdk-lib/aws-apigateway/README.md
     const integration_parameters = {
@@ -174,6 +189,26 @@ export class ApplicationStack extends cdk.Stack {
     })
     publishRubricResource.addMethod('POST', new apigw.LambdaIntegration(publish_rubric_fn, integration_parameters), response_parameters)
 
+    const duplicate_rubric_fn = new lambdaNodejs.NodejsFunction(this, 'DuplicateRubricFunction', {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: 'duplicate-rubric.handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, 'duplicate-rubric')),
+      vpc: vpc,
+      securityGroups: [securityGroup],
+      timeout: Duration.seconds(3),
+    })
+    duplicateRubricResource.addMethod('POST', new apigw.LambdaIntegration(duplicate_rubric_fn, integration_parameters), response_parameters)
+
+    const deprecate_rubric_fn = new lambdaNodejs.NodejsFunction(this, 'DeprecateRubricFunction', {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: 'deprecate-rubric.handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, 'deprecate-rubric')),
+      vpc: vpc,
+      securityGroups: [securityGroup],
+      timeout: Duration.seconds(3),
+    })
+    deprecateRubricResource.addMethod('POST', new apigw.LambdaIntegration(deprecate_rubric_fn, integration_parameters), response_parameters)
+
     const add_question_fn = new lambdaNodejs.NodejsFunction(this, 'AddQuestionFunction', {
       runtime: lambda.Runtime.NODEJS_22_X,
       handler: 'add-question.handler',
@@ -203,5 +238,75 @@ export class ApplicationStack extends cdk.Stack {
       timeout: Duration.seconds(3),
     })
     deleteQuestionResource.addMethod('POST', new apigw.LambdaIntegration(delete_question_fn, integration_parameters), response_parameters)
+
+    const register_journal_fn = new lambdaNodejs.NodejsFunction(this, 'RegisterJournalFunction', {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: 'register-journal.handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, 'register-journal')),
+      vpc: vpc,
+      securityGroups: [securityGroup],
+      timeout: Duration.seconds(3),
+    })
+    registerJournalResource.addMethod('POST', new apigw.LambdaIntegration(register_journal_fn, integration_parameters), response_parameters)
+
+    const withdraw_journal_fn = new lambdaNodejs.NodejsFunction(this, 'WithdrawJournalFunction', {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: 'withdraw-journal.handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, 'withdraw-journal')),
+      vpc: vpc,
+      securityGroups: [securityGroup],
+      timeout: Duration.seconds(3),
+    })
+    withdrawJournalResource.addMethod('POST', new apigw.LambdaIntegration(withdraw_journal_fn, integration_parameters), response_parameters)
+
+    const view_journals_fn = new lambdaNodejs.NodejsFunction(this, 'ViewJournalsFunction', {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: 'view-journals.handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, 'view-journals')),
+      vpc: vpc,
+      securityGroups: [securityGroup],
+      timeout: Duration.seconds(3),
+    })
+    viewJournalsResource.addMethod('GET', new apigw.LambdaIntegration(view_journals_fn, integration_parameters), response_parameters)
+
+    const create_issue_fn = new lambdaNodejs.NodejsFunction(this, 'CreateIssueFunction', {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: 'create-issue.handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, 'create-issue')),
+      vpc: vpc,
+      securityGroups: [securityGroup],
+      timeout: Duration.seconds(3),
+    })
+    createIssueResource.addMethod('POST', new apigw.LambdaIntegration(create_issue_fn, integration_parameters), response_parameters)
+
+    const delete_issue_fn = new lambdaNodejs.NodejsFunction(this, 'DeleteIssueFunction', {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: 'delete-issue.handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, 'delete-issue')),
+      vpc: vpc,
+      securityGroups: [securityGroup],
+      timeout: Duration.seconds(3),
+    })
+    deleteIssueResource.addMethod('POST', new apigw.LambdaIntegration(delete_issue_fn, integration_parameters), response_parameters)
+
+    const add_paper_fn = new lambdaNodejs.NodejsFunction(this, 'AddPaperFunction', {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: 'add-paper.handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, 'add-paper')),
+      vpc: vpc,
+      securityGroups: [securityGroup],
+      timeout: Duration.seconds(3),
+    })
+    addPaperResource.addMethod('POST', new apigw.LambdaIntegration(add_paper_fn, integration_parameters), response_parameters)
+    
+    const withdraw_paper_fn = new lambdaNodejs.NodejsFunction(this, 'WithdrawPaperFunction', {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: 'withdraw-paper.handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, 'withdraw-paper')),
+      vpc: vpc,
+      securityGroups: [securityGroup],
+      timeout: Duration.seconds(3),
+    })
+    withdrawPaperResource.addMethod('POST', new apigw.LambdaIntegration(withdraw_paper_fn, integration_parameters), response_parameters)
   }
 }

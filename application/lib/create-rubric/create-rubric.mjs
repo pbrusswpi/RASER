@@ -11,7 +11,7 @@ var pool = mysql.createPool({
     
 const insertRubric = (id, name) => new Promise((resolve, reject) => {
   pool.query(
-    "INSERT INTO rubric (id, name, low_threshold, high_threshold) VALUES (?, ?, 40, 55, 'draft')",
+    "INSERT INTO rubric (id, name, low_threshold, high_threshold) VALUES (?, ?, 40, 55)",
     [id, name],
     (error) => error ? reject(error.sqlMessage) : resolve(id))    
 })
