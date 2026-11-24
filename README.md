@@ -1,8 +1,5 @@
 # Iteration 2
 
-**Frontend**:
-Next.js app hosted on AWS Amplify (replaces the S3 bucket; approved by the professor), deployed from the StructureUpdate branch.
-
 **Access Url**: 
 https://iteration2.dt22dakt0bfii.amplifyapp.com 
 
@@ -43,9 +40,7 @@ When an issue has been created, below the new issue the user sees the next appli
 When a paper is created, to the right of its details that were inputted is a white "withdraw" button as the last use case. Select the "withdraw" button to withdraw the paper. 
 
 **AI Use Acknowledgement**: 
-Claude Code was integrated in the editing and reviewing stages of iteration 2 to ensure code correctness and overall application functionality in areas such as frontend styling as well as the backend setup involving <TO_BE_DO> 
-
-**Back end**:
+Claude Code was integrated in the editing and reviewing stages of iteration 2 to ensure code correctness and overall application functionality in areas such as frontend styling as well
 
 # Iteration 1
 
