@@ -40,7 +40,6 @@ When an issue has been created, below the new issue the user sees the next appli
 When a paper is created, to the right of its details that were inputted is a white "withdraw" button as the last use case. Select the "withdraw" button to withdraw the paper. 
 
 **AI Use Acknowledgement**: 
-<<<<<<< HEAD
 Claude Code was integrated in the editing and reviewing stages of iteration 2 to ensure code correctness and overall application functionality in areas such as frontend styling as well as the backend setup involving DBeaver. 
 
 **Back end**: Same as Iteration 1 below, 9 new AWS Lambda functions (Node.js 22) added behind API Gateway, connected to an RDS MySQL database. Deployed with AWS CDK application/. 
@@ -49,9 +48,6 @@ Try it: https://q9iq2yw6ji.execute-api.us-east-1.amazonaws.com/prod/rubric/list
 
 Every route returns 200 on success and 400 with an error message, for example when deleting a published rubric.
 config.mjs (database credentials) is not in the repo, for security.
-=======
-Claude Code was integrated in the editing and reviewing stages of iteration 2 to ensure code correctness and overall application functionality in areas such as frontend styling as well
->>>>>>> origin/iteration2
 
 # Iteration 1
 
